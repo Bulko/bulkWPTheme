@@ -18,9 +18,18 @@
 			$(".hamburger").toggleClass("is-active");
 		});
 		// ajouter fleche sous-menu
-		$(".menu-mobile li.menu-item-has-children").prepend("<a class='sub-menu-btn' href='#'><i class=\"fa fa-chevron-right\"></i></a>");
+		$(".menu-mobile li.menu-item-has-children").prepend("<div class='sub-menu-btn'><i class=\"fa fa-chevron-right\"></i></div>");
 		$("li.menu-item-has-children .sub-menu-btn").on("click", function(e) {
-			$(this).parent().toggleClass("openSubMenu");
+			var toggleBtn = $(this).parent();
+			if ( toggleBtn.hasClass("openSubMenu") )
+			{
+				toggleBtn.removeClass("openSubMenu");
+			}
+			else
+			{
+				$(".openSubMenu").removeClass('openSubMenu');
+				toggleBtn.addClass("openSubMenu");
+			}
 		});
 
 		// Track contact form 7
