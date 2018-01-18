@@ -45,6 +45,13 @@
 			ga('send', 'event', 'contact-form', 'submit');
 		}, false );
 		// End Track contact form 7
+		if ( pageWidth >= 481 )
+		{
+			setTimeout( function()
+			{
+				setAnimationList();
+			}, 100);
+		}
 	}
 	var cache = function()
 	{
@@ -81,7 +88,7 @@
 		var fromTop = $(window).scrollTop();
 		if ( $(window).width() >= 481 )
 		{
-			animationList();
+			setAnimationList();
 		}
 		$('body').toggleClass("down", (fromTop > 250));
 	});
