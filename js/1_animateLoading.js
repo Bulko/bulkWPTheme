@@ -1,12 +1,28 @@
-function animationList()
+function getAnilationList()
 {
-	// animatedLoading( ".selector", "animaton", timer );
+	return [
+		[".selectorCSS", "classCSS"],
+		["#selectorCSS", "animateCSS", delayInMS]
+	];
+}
+
+function setAnimationList()
+{
+	var animation = getAnilationList();
+	for ( var i = 0; i < animation.length; i++ )
+	{
+		animatedLoading( animation[i][0], animation[i][1], animation[i][2] );
+	}
 	return true;
 }
 
 function resetAnimationList()
 {
-	// resetAnimation( ".selector", "animaton", timer );
+	var animation = getAnilationList();
+	for ( var i = 0; i < animation.length; i++ )
+	{
+		resetAnimation( animation[i][0], animation[i][1] );
+	}
 	return true;
 }
 
