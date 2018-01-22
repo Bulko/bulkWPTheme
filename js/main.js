@@ -30,7 +30,7 @@
 		console.log( "🦄 TurboLinks Change " );
 		trackPChange();
 	}
-	// ready();
+	ready();
 	document.addEventListener("turbolinks:before-cache", cache);
 	document.addEventListener("turbolinks:load", ready);
 	document.addEventListener("page:change", change);
