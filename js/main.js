@@ -4,54 +4,20 @@
 	{
 		console.log( "🦄 TurboLinks Ready -> " + window.location.href + " width: " + $(window).width());
 
-		// MENU MOBILE
-		// reset
-		$(".hamburger.is-active").removeClass("is-active");
-		// ouvrir le menu
-		$(".hamburger").on("click", function(e) {
-			$("body").toggleClass("openMenu");
-			$(this).toggleClass("is-active");
-		});
-		// fermer le menu
-		$(".mobile-fermeture").on("click", function(e) {
-			$("body").toggleClass("openMenu");
-			$(".hamburger").toggleClass("is-active");
-		});
-		// ajouter fleche sous-menu
-		$(".menu-mobile li.menu-item-has-children").prepend("<div class='sub-menu-btn'><i class=\"fa fa-chevron-right\"></i></div>");
-		$("li.menu-item-has-children .sub-menu-btn").on("click", function(e) {
-			var toggleBtn = $(this).parent();
-			if ( toggleBtn.hasClass("openSubMenu") )
-			{
-				toggleBtn.removeClass("openSubMenu");
-			}
-			else
-			{
-				$(".openSubMenu").removeClass('openSubMenu');
-				toggleBtn.addClass("openSubMenu");
-			}
-		});
+		// We reset the scroll to 0 at every page load
+		$('html, body').scrollTop(0);
 
-		// Track contact form 7
-		//@see https://github.com/Bulko/bulkCform7Tracker/blob/master/js/gaTrack.js
-		if ( typeof __gaTracker == 'function' )
+		if ( $(window).width() >= 481 )
 		{
-			__gaTracker( function() {
-				window.ga = __gaTracker;
-			});
+			setAnimationList();
 		}
-		document.addEventListener( 'wpcf7mailsent', function( event )
-		{
-			ga('send', 'event', 'contact-form', 'submit');
-		}, false );
-		// End Track contact form 7
-		if ( pageWidth >= 481 )
-		{
-			setTimeout( function()
-			{
-				setAnimationList();
-			}, 100);
-		}
+		// VIDEO 16_9
+		$("iframe").resize16_9();
+		$(".sub-vid").resize16_9();
+		$(".16-9").resize16_9();
+		// VIDEO 16_9 END
+		$(".menu-mobile").bkoMenu();
+		trackCF7();
 	}
 	var cache = function()
 	{
@@ -62,23 +28,9 @@
 	var change = function()
 	{
 		console.log( "🦄 TurboLinks Change " );
-		var url = window.location.href;
-		var data = {
-			'event':'pageView',
-			'virtualUrl': url
-		};
-		if(window['referer'] !== undefined)
-		{
-			data['pageReferrer'] = window['referer'];
-		}
-		else
-		{
-			data['pageReferrer'] = document.referrer;
-		}
-		dataLayer.push(data);
-		window['referer'] = window.location.href;
+		trackPChange();
 	}
-	ready();
+	// ready();
 	document.addEventListener("turbolinks:before-cache", cache);
 	document.addEventListener("turbolinks:load", ready);
 	document.addEventListener("page:change", change);
@@ -90,6 +42,6 @@
 		{
 			setAnimationList();
 		}
-		$('body').toggleClass("down", (fromTop > 250));
+		$('body').toggleClass("down", (fromTop > 150));
 	});
 } )( jQuery );
