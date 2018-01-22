@@ -28,18 +28,17 @@ $.fn.isBound = function(type, fn)
  *checkVisible
  *@author Golga <r-ro@bulko.net>
  *@since 	https://github.com/Bulko/qant_io_templates
- *@param	String elem		target element selector
  *@param	String evalType	searched property
  *@return	Bool
  */
-function checkVisible( elem, evalType )
+$.fn.checkVisible = function( evalType )
 {
 	evalType = evalType || "visible";
 
 	var vpH = $(window).height(), // Viewport Height
 		st = $(window).scrollTop(), // Scroll Top
-		y = $(elem).offset().top,
-		elementHeight = $(elem).height();
+		y = $(this).offset().top,
+		elementHeight = $(this).height();
 	if ( evalType === "visible" )
 	{
 		return ((y < (vpH + st)) && (y > (st - elementHeight)));
@@ -71,6 +70,70 @@ function getYTId( urlYT )
 	}
 }
 
+
+/**
+ *plaxEnter
+ *@author Golga <r-ro@bulko.net>
+ *@since Peperiot 1.0.0
+ *@param  DOMObj innerElem
+ *@return Void
+ */
+function plaxEnter ( innerElem )
+{
+	var innerNumber = getPlaxInnerNumber( innerElem );
+
+	switch ( innerNumber ) // Specific innerList
+	{
+		case 1:
+		var innerList = [ 1, 4, 5 ];
+		break;
+		case 2:
+		var innerList = [ 1, 2, 4, 5, 6, 7 ];
+		break;
+		case 3:
+		var innerList = [ 1, 3, 4, 5 ];
+		break;
+		case 4:
+		var innerList = [ 1, 2, 4, 5 ];
+		break;
+		default:
+		var innerList = [ 1, 2, 3, 4, 5, 6, 7 ];
+		break;
+	}
+
+	for ( var it = 0; it < innerList.length; it++ )
+	{
+		$('.img-seule-' + innerList[ it ] + ' .inner').addClass( "plax-" + innerNumber );
+	}
+}
+
+/**
+ *plaxLeave
+ *@author Golga <r-ro@bulko.net>
+ *@since Peperiot 1.0.0
+ *@param  DOMObj innerElem
+ *@return Void
+ */
+function plaxLeave ( innerElem )
+{
+	// Retrive elem 2nd class jQuerylike
+	var innerNumber = getPlaxInnerNumber( innerElem );
+	$( ".plax-" + innerNumber ).removeClass( "plax-" + innerNumber ); // Remove all "inerClass"
+}
+
+/**
+ *getPlaxInnerNumber
+ *@author Golga <r-ro@bulko.net>
+ *@since Peperiot 1.0.0
+ *@param  DOMObj innerElem
+ *@return Void
+ */
+function getPlaxInnerNumber( innerElem )
+{
+	// Retrive elem 2nd class jQuerylike
+	return $(innerElem).attr("class").split(" ")[1].split("step-")[1];
+}
+
 /**
  *trackCF7
  *@author Golga <r-ro@bulko.net>
@@ -91,6 +154,31 @@ function trackCF7()
 	{
 		ga('send', 'event', 'contact-form', 'submit');
 	}, false );
+}
+
+/**
+ *trackPChange
+ *@author Golga <r-ro@bulko.net>
+ *@since Peperiot 1.0.0
+ *@return Void
+ */
+function trackPChange()
+{
+	var url = window.location.href;
+	var data = {
+		'event':'pageView',
+		'virtualUrl': url
+	};
+	if(window['referer'] !== undefined)
+	{
+		data['pageReferrer'] = window['referer'];
+	}
+	else
+	{
+		data['pageReferrer'] = document.referrer;
+	}
+	dataLayer.push(data);
+	window['referer'] = window.location.href;
 }
 
 /**
@@ -165,4 +253,3 @@ $.fn.bkoMenu = function( param )
 	// reset
 	$burgerAvtive.removeClass( isActive );
 }
-
