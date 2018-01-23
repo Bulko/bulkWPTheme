@@ -151,7 +151,6 @@ $.fn.bkoMenu = function( param )
 	var $burger = $( param.burgerSelector );
 	var $burgerAvtive = $( param.burgerSelector + param.oppenBurgerSelector );
 	var $close = $( param.closeSelector );
-	var $main = $( param.mainSelector );
 	var isOppen = param.oppenSelector.substring( 1 );
 	var isOppenSub = param.oppenSubSelector.substring( 1 );
 	var isActive = param.oppenBurgerSelector.substring( 1 );
@@ -160,7 +159,9 @@ $.fn.bkoMenu = function( param )
 	// function
 	var toggleBkoMenu = function()
 	{
-		$main.toggleClass( isOppen );
+		// le selecteur 'li.menu-item-has-children ' + param.btnSelectorSub
+		// ne dois en aucain cas etres stoqué dans une variable (probleme de porté du sélécteur $ avec turbolink)
+		$( param.mainSelector ).toggleClass( isOppen );
 		$burger.toggleClass( isActive );
 	}
 
@@ -172,7 +173,7 @@ $.fn.bkoMenu = function( param )
 		// ajouter fleche sous-menu
 		$(".menu-mobile li.menu-item-has-children").prepend("<div class='" + btnSelectorSub + "'><i class=\"fa fa-chevron-right\"></i></div>");
 		// le selecteur 'li.menu-item-has-children ' + param.btnSelectorSub
-		// ne dois en aucain cas etres stoqué dans une variable (probleme de porté du sélécteur $)
+		// ne dois en aucain cas etres stoqué dans une variable (probleme de porté du sélécteur $ avec turbolink)
 		$( 'li.menu-item-has-children ' + param.btnSelectorSub ).on( "click", function(e) {
 			var toggleBtn = $(this).parent();
 			if ( toggleBtn.hasClass( isOppenSub ) )
@@ -189,3 +190,4 @@ $.fn.bkoMenu = function( param )
 	// reset
 	$burgerAvtive.removeClass( isActive );
 }
+
