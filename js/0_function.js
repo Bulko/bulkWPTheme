@@ -101,20 +101,8 @@ function trackCF7()
 function trackPChange()
 {
 	var url = window.location.href;
-	var data = {
-		'event':'pageView',
-		'virtualUrl': url
-	};
-	if(window['referer'] !== undefined)
-	{
-		data['pageReferrer'] = window['referer'];
-	}
-	else
-	{
-		data['pageReferrer'] = document.referrer;
-	}
-	dataLayer.push(data);
-	window['referer'] = window.location.href;
+	ga("set", "location", url);
+	ga("send", "pageview");
 }
 
 /**
