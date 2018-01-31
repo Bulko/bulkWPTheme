@@ -18,22 +18,15 @@
 		// VIDEO 16_9 END
 		$(".menu-mobile").bkoMenu();
 		trackCF7();
+		trackPChange();
 	}
 	var cache = function()
 	{
 		console.log( "🦄 TurboLinks CacheLoad" );
 		resetAnimationList();
 	}
-	// Turbolink tracker
-	var change = function()
-	{
-		console.log( "🦄 TurboLinks Change " );
-		trackPChange();
-	}
-	ready();
 	document.addEventListener("turbolinks:before-cache", cache);
 	document.addEventListener("turbolinks:load", ready);
-	document.addEventListener("page:change", change);
 
 	$(window).on('scroll', function()
 	{
