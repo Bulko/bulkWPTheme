@@ -1,0 +1,14 @@
+{
+	"name": "{my-theme-name}",
+	"version": "1.0.0",
+	"description": "Gulp for {my-theme-name} wordpress theme.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"gulp-oyana": "^0.7.1"
+	}
+}
