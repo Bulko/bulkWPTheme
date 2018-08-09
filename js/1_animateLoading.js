@@ -1,14 +1,14 @@
-function getAnilationList()
+function getAnimationList()
 {
 	return [
 		[".selectorCSS", "classCSS"],
-		["#selectorCSS", "animateCSS", delayInMS]
+		["#selectorCSS", "animateCSS", 500] // Delay in ms (facultatif)
 	];
 }
 
 function setAnimationList()
 {
-	var animation = getAnilationList();
+	var animation = getAnimationList();
 	for ( var i = 0; i < animation.length; i++ )
 	{
 		animatedLoading( animation[i][0], animation[i][1], animation[i][2] );
@@ -18,7 +18,7 @@ function setAnimationList()
 
 function resetAnimationList()
 {
-	var animation = getAnilationList();
+	var animation = getAnimationList();
 	for ( var i = 0; i < animation.length; i++ )
 	{
 		resetAnimation( animation[i][0], animation[i][1] );
