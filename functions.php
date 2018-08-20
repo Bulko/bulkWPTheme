@@ -5,7 +5,8 @@
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  */
 define("THEME_NAME", "{my-theme-name}" );
-define("TPL_DIR", get_template_directory_uri() );
+define("TPL_URI", get_template_directory_uri() );
+define("TPL_PATH", get_template_directory() );
 
 if ( ! function_exists( 'setup_theme_option' ) ) :
 	/**
@@ -128,14 +129,14 @@ if ( !( is_admin() ) )
 		wp_enqueue_style( 'googleFontBis', 'https://fonts.googleapis.com/css?family=Muli:300,400,700&amp;subset=latin-ext', $tkn );
 		wp_enqueue_style( 'bxSlider', 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.min.css', $tkn );
 		wp_enqueue_style( 'animateCSS', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css', $tkn );
-		wp_enqueue_style( '{my-theme-name}', get_template_directory_uri() . '/css/main.css', $tkn );
+		wp_enqueue_style( '{my-theme-name}', TPL_URI . '/css/main.css', $tkn );
 
 		wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.2.1.min.js', array(), $tkn, false );
 		wp_enqueue_script( 'fontawesome', 'https://use.fontawesome.com/baa4d12d0b.js', array(), $tkn, false );
 		wp_enqueue_script( 'turbolinks', 'https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.0.3/turbolinks.js', array('jquery'), $tkn, false );
 		wp_enqueue_script( 'bxSlider', 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.min.js', array('jquery'), $tkn, false );
 		wp_enqueue_script( 'ga', 'https://www.google-analytics.com/analytics.js', array(), $tkn, false );
-		wp_enqueue_script( '{my-theme-name}', get_template_directory_uri() . '/jsMin/main.min.js', array('jquery', 'turbolinks'), $tkn, false );
+		wp_enqueue_script( '{my-theme-name}', TPL_URI . '/jsMin/main.min.js', array('jquery', 'turbolinks'), $tkn, false );
 		wp_deregister_script('contact-form-7');
 		wp_deregister_script('maintenance-switch-button');
 		wp_localize_script( '{my-theme-name}', 'ajax_object',
@@ -151,13 +152,12 @@ if ( !( is_admin() ) )
 
 function add_favicon()
 {
-	$baseUrl = get_template_directory_uri();
 	?>
-	<link rel="apple-touch-icon" sizes="180x180" href="<?=$baseUrl?>/img/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="<?=$baseUrl?>/img/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="<?=$baseUrl?>/img/favicon/favicon-16x16.png">
-	<link rel="manifest" href="<?=$baseUrl?>/img/favicon/manifest.json">
-	<link rel="mask-icon" href="<?=$baseUrl?>/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="apple-touch-icon" sizes="180x180" href="<?= TPL_URI ?>/img/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?= TPL_URI ?>/img/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="<?= TPL_URI ?>/img/favicon/favicon-16x16.png">
+	<link rel="manifest" href="<?= TPL_URI ?>/img/favicon/manifest.json">
+	<link rel="mask-icon" href="<?= TPL_URI ?>/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="theme-color" content="#ffffff">
 	<?php
 }
