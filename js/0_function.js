@@ -148,7 +148,7 @@ $.fn.bkoMenu = function( param )
 	var toggleBkoMenu = function()
 	{
 		// le selecteur 'li.menu-item-has-children ' + param.btnSelectorSub
-		// ne dois en aucain cas etres stoqué dans une variable (probleme de porté du sélécteur $ avec turbolink)
+		// ne doit en aucun cas être stoqué dans une variable (problème de portée du sélécteur $ avec turbolink)
 		$( param.mainSelector ).toggleClass( isOppen );
 		$burger.toggleClass( isActive );
 	}
@@ -156,25 +156,27 @@ $.fn.bkoMenu = function( param )
 	if( $burger.isBound( "bkoMenu" ) == false )
 	{
 		$burger.on( "click", toggleBkoMenu );
-		$close.on( "click", toggleBkoMenu );
-
-		// ajouter fleche sous-menu
-		$(".menu-mobile li.menu-item-has-children").prepend("<div class='" + btnSelectorSub + "'><i class=\"fa fa-chevron-right\"></i></div>");
-		// le selecteur 'li.menu-item-has-children ' + param.btnSelectorSub
-		// ne dois en aucain cas etres stoqué dans une variable (probleme de porté du sélécteur $ avec turbolink)
-		$( 'li.menu-item-has-children ' + param.btnSelectorSub ).on( "click", function(e) {
-			var toggleBtn = $(this).parent();
-			if ( toggleBtn.hasClass( isOppenSub ) )
-			{
-				toggleBtn.removeClass( isOppenSub );
-			}
-			else
-			{
-				$(param.btnSelectorSub).removeClass( isOppenSub );
-				toggleBtn.addClass( isOppenSub );
-			}
-		});
 	}
+	if( $close.isBound( "bkoMenu" ) == false )
+	{
+		$close.on( "click", toggleBkoMenu );
+	}
+	// ajouter flèche sous-menu
+	$(".menu-mobile li.menu-item-has-children").prepend("<div class='" + btnSelectorSub + "'><i class=\"fa fa-chevron-right\"></i></div>");
+	// le selecteur 'li.menu-item-has-children ' + param.btnSelectorSub
+	// ne doit en aucun cas être stoqué dans une variable (problème de portée du sélécteur $ avec turbolink)
+	$( '.menu li.menu-item-has-children ' + param.btnSelectorSub ).on( "click", function(e) {
+		var toggleBtn = $(this).parent();
+		if ( toggleBtn.hasClass( isOppenSub ) )
+		{
+			toggleBtn.removeClass( isOppenSub );
+		}
+		else
+		{
+			$(param.btnSelectorSub).removeClass( isOppenSub );
+			toggleBtn.addClass( isOppenSub );
+		}
+	});
 	// reset
 	$burgerAvtive.removeClass( isActive );
 }
