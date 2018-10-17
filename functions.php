@@ -128,7 +128,6 @@ if ( !( is_admin() ) )
 		wp_enqueue_style( 'googleFont', 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&amp;subset=latin-ext', $tkn );
 		wp_enqueue_style( 'googleFontBis', 'https://fonts.googleapis.com/css?family=Muli:300,400,700&amp;subset=latin-ext', $tkn );
 		wp_enqueue_style( 'bxSlider', 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.12/jquery.bxslider.min.css', $tkn );
-		wp_enqueue_style( 'animateCSS', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css', $tkn );
 		wp_enqueue_style( '{my-theme-name}', TPL_URI . '/css/main.css', $tkn );
 
 		wp_enqueue_script( 'jquery', 'https://code.jquery.com/jquery-3.2.1.min.js', array(), $tkn, false );
